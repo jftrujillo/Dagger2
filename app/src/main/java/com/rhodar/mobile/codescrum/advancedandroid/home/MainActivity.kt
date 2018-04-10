@@ -1,7 +1,8 @@
-package com.rhodar.mobile.codescrum.advancedandroid
+package com.rhodar.mobile.codescrum.advancedandroid.home
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.rhodar.mobile.codescrum.advancedandroid.R
 
 class MainActivity : AppCompatActivity() {
 
