@@ -1,13 +1,11 @@
 package com.rhodar.mobile.codescrum.advancedandroid.home
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+
 import com.rhodar.mobile.codescrum.advancedandroid.R
+import com.rhodar.mobile.codescrum.advancedandroid.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity() {
+    override fun layoutRes(): Int {
+        return R.layout.activity_main
     }
 }
