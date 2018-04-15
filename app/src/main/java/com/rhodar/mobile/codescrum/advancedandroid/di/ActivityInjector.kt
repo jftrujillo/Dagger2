@@ -10,12 +10,12 @@ import javax.inject.Provider
 
 class ActivityInjector
 @Inject
-constructor(private val activityInjector : Map<Class<Activity>,Provider<AndroidInjector.Factory<Activity>>>){
-    private val cache = HashMap<String,AndroidInjector<Activity>>()
+constructor(private val activityInjector : Map<Class<out Activity>, @JvmSuppressWildcards Provider<AndroidInjector.Factory<out Activity>>>){
+    private val cache = HashMap<String,AndroidInjector<out Activity>>()
 
     companion object {
         fun get(context : Context) : ActivityInjector{
-                return (context.applicationContext as App).getActivityInjector()
+                return (context.applicationContext as App).activityInjector
         }
     }
 

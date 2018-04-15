@@ -8,8 +8,3 @@ import java.lang.annotation.Target;
 import dagger.MapKey;
 
 
-@MapKey
-@Target(ElementType.METHOD)
-public  @interface ExampleJava {
-    Class<? extends Controller> value();
-}

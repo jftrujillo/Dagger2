@@ -11,7 +11,7 @@ class Injector{
 
         fun inject(controller : Controller)  = ScreenInjector.get(controller.activity!!).inject(controller)
 
-        fun clearComponent(activity: Activity){}
+        fun clearComponent(activity: Activity){ActivityInjector.get(activity).clear(activity)}
 
         fun clearComponent(controller: Controller) = ScreenInjector.get(controller.activity!!).clear(controller)
     }

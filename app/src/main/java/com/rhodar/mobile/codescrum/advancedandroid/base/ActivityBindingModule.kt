@@ -5,6 +5,7 @@ import com.rhodar.mobile.codescrum.advancedandroid.home.MainActivity
 import com.rhodar.mobile.codescrum.advancedandroid.home.MainActivityComponent
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.android.ActivityKey
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap

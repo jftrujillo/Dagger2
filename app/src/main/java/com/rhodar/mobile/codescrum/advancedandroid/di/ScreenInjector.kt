@@ -10,7 +10,7 @@ import kotlin.reflect.jvm.internal.impl.javax.inject.Provider
 
 
 @ActivityScope
-class ScreenInjector @Inject constructor(val screenInjectors: Map<Class<Controller>, Provider<AndroidInjector.Factory<Controller>>>) {
+class ScreenInjector @Inject constructor(val screenInjectors: Map<Class<Controller>, @JvmSuppressWildcards Provider<AndroidInjector.Factory<Controller>>>) {
     companion object {
         fun get(activity: Activity) : ScreenInjector{
             if (activity !is BaseActivity){
