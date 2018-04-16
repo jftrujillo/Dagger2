@@ -7,4 +7,4 @@ import kotlin.reflect.KClass
 
 @MapKey
 @Target(AnnotationTarget.FUNCTION)
-annotation class ControllerKey(@JvmSuppressWildcards val value: KClass<out Controller>)
+annotation class ControllerKey(val value: KClass<out Controller>)

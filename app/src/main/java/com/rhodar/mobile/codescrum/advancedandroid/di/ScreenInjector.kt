@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.rhodar.mobile.codescrum.advancedandroid.di
 
 import android.app.Activity
@@ -10,17 +12,19 @@ import kotlin.reflect.jvm.internal.impl.javax.inject.Provider
 
 
 @ActivityScope
-class ScreenInjector @Inject constructor(val screenInjectors: Map<Class<Controller>, @JvmSuppressWildcards Provider<AndroidInjector.Factory<Controller>>>) {
+class ScreenInjector @Inject constructor(private val screenInjectors: Map<Class<out Controller>, @JvmSuppressWildcards Provider<AndroidInjector.Factory<out Controller>>>) {
     companion object {
         fun get(activity: Activity) : ScreenInjector{
             if (activity !is BaseActivity){
                 throw java.lang.IllegalArgumentException("Controller must be hosted by BaseActivity")
             }
-            return activity.screenInjector
+            return (activity as BaseActivity).screenInjector
         }
     }
 
-    private val cache = HashMap<String,AndroidInjector<Controller>>()
+
+
+    private val cache = HashMap<String,AndroidInjector<out Controller>>()
 
     fun inject(controller : Controller){
         if (controller !is BaseController){
@@ -28,15 +32,15 @@ class ScreenInjector @Inject constructor(val screenInjectors: Map<Class<Controll
         }
         val instanceId = controller.instanceId
         if (cache.containsKey(instanceId)){
-            cache[instanceId]!!.inject(controller)
+            (cache[instanceId] as AndroidInjector<Controller>).inject(controller)
             return
         }
-        val injectorFactory = screenInjectors[controller::class.java]?.get()
-        val injector = injectorFactory?.create(controller)
+        val injectorFactory : AndroidInjector.Factory<Controller> = screenInjectors[controller::class.java]?.get() as AndroidInjector.Factory<Controller>
+        val injector = injectorFactory.create(controller)
         if (injector != null) {
             cache[instanceId] = injector
-            injector.inject(controller)
         }
+        injector.inject(controller)
     }
 
     fun clear(controller: Controller){

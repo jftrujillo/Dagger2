@@ -16,7 +16,8 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.*
 import kotlin.reflect.jvm.internal.impl.javax.inject.Inject
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity @Inject constructor()
+    : AppCompatActivity() {
     private val INSTANCE_ID_KEY = "instance_id"
     private lateinit var instanceId: String
     private lateinit var router: Router

@@ -8,11 +8,8 @@ import dagger.Provides
 
 @Module
 class AppModule(private val app: Application) {
-
-
     @Provides
     fun provideApplicationContext(): Context {
         return app
     }
-
 }

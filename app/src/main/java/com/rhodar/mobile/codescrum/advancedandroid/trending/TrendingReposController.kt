@@ -11,6 +11,7 @@ import kotlin.reflect.jvm.internal.impl.javax.inject.Inject
 class TrendingReposController : BaseController() {
 
     @Inject lateinit var activity : MainActivity
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         return  container
     }

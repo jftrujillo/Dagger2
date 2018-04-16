@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.rhodar.mobile.codescrum.advancedandroid.di
 
 import android.app.Activity
@@ -25,15 +27,16 @@ constructor(private val activityInjector : Map<Class<out Activity>, @JvmSuppress
         }
         val instanceId = activity.getInstanceId()
         if (cache.containsKey(instanceId)){
-            cache[instanceId]!!.inject(activity)
+            //noinspection unchecked
+            (cache[instanceId] as AndroidInjector<Activity>).inject(activity)
             return
         }
-        val injectorFactory  = activityInjector[activity::class.java]?.get()
-        val injector = injectorFactory?.create(activity)
+        val injectorFactory : AndroidInjector.Factory<Activity>  = activityInjector[activity::class.java]?.get() as AndroidInjector.Factory<Activity>
+        val injector = injectorFactory.create(activity)
         if (injector != null) {
             cache[instanceId] = injector
-            injector.inject(activity)
         }
+        injector.inject(activity)
     }
 
     fun clear(activity: Activity){
